@@ -1,0 +1,33 @@
+server:
+  port: 9020
+spring:
+  application:
+    name: auth-service
+  datasource:
+    url: ${USER_SERVICE_DATASOURCE_URL}
+    username: ${USER_SERVICE_DATASOURCE_USERNAME}
+    password: ${USER_SERVICE_DATASOURCE_PASSWORD}
+    driver-class-name: ${USER_SERVICE_DATASOURCE_DRIVER_CLASS_NAME}
+    hikari:
+      connection-timeout: 10000
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+app:
+  jwt:
+    secret: "2D4A614E645267556B58703273357638792F423F4428472B4B6250655368566D"
+    tokenExpiration: 3m
+    refreshTokenExpiration: 30m
+springdoc:
+  api-docs:
+    path: /api-docs
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka
