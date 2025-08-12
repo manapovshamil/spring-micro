@@ -1,0 +1,54 @@
+server:
+  port: 5000
+
+spring:
+  application:
+    name: auth-service
+#  config:
+#    import: optional:configserver:http://localhost:8888
+  datasource:
+    url: ${DATASOURCE_URL}
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
+    driver-class-name: ${DATASOURCE_CLASS_NAME}
+    hikari:
+      connection-timeout: 10000
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: ${KEYCLOAK_REALM_URL}
+      client:
+        provider:
+          keycloak:
+            issuer-uri: ${KEYCLOAK_REALM_URL}
+            #user-name-attribute: preferred_username
+        registration:
+          keycloak:
+            client-id: ${KEYCLOAK_CLIENT_ID}
+            client-secret: ${KEYCLOAK_CLIENT_SECRET}
+            scope: openid, profile, email
+
+#logging:
+#  level:
+#    org.springdoc: DEBUG
+#    org.springframework.web: DEBUG
+
+keycloak:
+  url: ${KEYCLOAK_URI}
+  authUrl: ${KEYCLOAK_TOKEN_URL}
+  realm: ${KEYCLOAK_REALM}
+  clientId: ${KEYCLOAK_CLIENT_ID}
+  username: ${KEYCLOAK_USERNAME}
+  password: ${KEYCLOAK_PASSWORD}
+  grantType: ${KEYCLOAK_GRANT_TYPE}
+  clientSecret: ${KEYCLOAK_CLIENT_SECRET}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+
